@@ -2,6 +2,13 @@
 #include "rabbitCategory.hpp"
 
 
+RabbitCategory::RabbitCategory(bool gender, int month) : 
+    gender(gender), 
+    month(month)
+{
+    survivalRate = getSurvivalRate();
+}
+
 double RabbitCategory::getSurvivalRate()
 {
     if (getMonths() < 6)
@@ -14,12 +21,6 @@ double RabbitCategory::getSurvivalRate()
     return 0.0;
 }
 
-RabbitCategory::RabbitCategory(bool gender, int month) : 
-    gender(gender), 
-    month(month)
-{
-    survivalRate = getSurvivalRate();
-}
 
 int RabbitCategory::getMonths()
 {
