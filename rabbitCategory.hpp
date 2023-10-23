@@ -8,7 +8,6 @@ private:
     int month;   //age in months
     int male; //number of male rabbit
     int female; //number of female rabbit
-    int nbRabbits; //number of rabbits in the category
     double survivalRate; //survival rate
 
     double getSurvivalRate();
@@ -16,9 +15,10 @@ private:
 public:
     RabbitCategory(int month);
     int getMonths();
-    bool getGender();
+    int getMale();
+    int getFemale();
     int getNbRabbits();
-    void transferRabbit(); 
+    void transferRabbit(RabbitCategory category); 
     void addRabbits(int male, int female);
 };
 

@@ -22,7 +22,6 @@ double RabbitCategory::getSurvivalRate()
 
 void RabbitCategory::addRabbits(int male, int female)
 {
-    this->nbRabbits = male + female;
     this->male = male;
     this->female = female;
 }
@@ -32,7 +31,17 @@ int RabbitCategory::getMonths()
     return month;
 }
 
+int RabbitCategory::getMale()
+{
+    return male;
+}
+
+int RabbitCategory::getFemale()
+{
+    return female;
+}
+
 int RabbitCategory::getNbRabbits()
 {
-    return nbRabbits;
+    return male + female;
 }
