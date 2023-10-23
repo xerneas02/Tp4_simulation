@@ -6,19 +6,20 @@ class RabbitCategory
 {
 private:
     int month;   //age in months
-    bool gender; //gender of rabbits
+    int male; //number of male rabbit
+    int female; //number of female rabbit
     int nbRabbits; //number of rabbits in the category
     double survivalRate; //survival rate
 
     double getSurvivalRate();
 
 public:
-    RabbitCategory(bool gender, int month);
+    RabbitCategory(int month);
     int getMonths();
     bool getGender();
     int getNbRabbits();
-    int nbAged(); 
-    void addRabbits(int nbRabbits);
+    void transferRabbit(); 
+    void addRabbits(int male, int female);
 };
 
 #endif

@@ -2,8 +2,7 @@
 #include "rabbitCategory.hpp"
 
 
-RabbitCategory::RabbitCategory(bool gender, int month) : 
-    gender(gender), 
+RabbitCategory::RabbitCategory(int month) : 
     month(month)
 {
     survivalRate = getSurvivalRate();
@@ -21,20 +20,16 @@ double RabbitCategory::getSurvivalRate()
     return 0.0;
 }
 
-void RabbitCategory::addRabbits(int nbRabbits)
+void RabbitCategory::addRabbits(int male, int female)
 {
-    this->nbRabbits += nbRabbits;
+    this->nbRabbits = male + female;
+    this->male = male;
+    this->female = female;
 }
-
 
 int RabbitCategory::getMonths()
 {
     return month;
-}
-
-bool RabbitCategory::getGender()
-{
-    return gender;
 }
 
 int RabbitCategory::getNbRabbits()
