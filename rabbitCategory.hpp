@@ -18,7 +18,7 @@ public:
     int getMale();
     int getFemale();
     int getNbRabbits();
-    void transferRabbit(RabbitCategory category); 
+    void transferRabbit(RabbitCategory * category); 
     void addRabbits(int male, int female);
 };
 

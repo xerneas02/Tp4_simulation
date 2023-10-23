@@ -256,3 +256,17 @@ double genrand_res53(void)
     unsigned long a=genrand_int32()>>5, b=genrand_int32()>>6; 
     return(a*67108864.0+b)*(1.0/9007199254740992.0); 
 } 
+
+/**
+ * @brief Génère un nombre réel aléatoire uniformément distribué entre deux valeurs spécifiées. [min, max[
+ *
+ * @param min La valeur minimale de la plage de valeurs à générer.
+ * @param max La valeur maximale de la plage de valeurs à générer.
+ *
+ * @return Un nombre réel aléatoire uniformément distribué entre min et max.
+ */
+double rand_reel_uniform(double min, double max)
+{
+    double r = genrand_real2();
+    return min + r * (max - min);
+}
