@@ -27,6 +27,11 @@ double RabbitCategory::getSurvivalRate()
     return 0.0;
 }
 
+void RabbitCategory::addRabbits(int nbRabbits)
+{
+    this->nbRabbits += nbRabbits;
+}
+
 
 int RabbitCategory::getMonths()
 {
