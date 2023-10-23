@@ -29,7 +29,7 @@ RabbitCategory::RabbitCategory(bool gender, int month) :
 
 int RabbitCategory::getMonths()
 {
-    return months;
+    return month;
 }
 
 bool RabbitCategory::getGender()
