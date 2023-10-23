@@ -16,6 +16,7 @@ public:
     RabbitCategory(bool gender, int month);
     int getMonths();
     bool getGender();
+    int getNbRabbits();
     int nbAged(); 
     void addRabbits(int nbRabbits);
 };
