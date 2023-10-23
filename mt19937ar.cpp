@@ -42,7 +42,7 @@
 */
 
 #include <stdio.h>
-#include "mt.h"
+#include "mt.hpp"
 
 /* Period parameters */  
 #define MATRIX_A 0x9908b0dfUL   /* constant vector a */
