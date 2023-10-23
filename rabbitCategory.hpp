@@ -5,7 +5,7 @@
 class RabbitCategory
 {
 private:
-    int months;   //age in months
+    int month;   //age in months
     bool gender; //gender of rabbits
     int nbRabbits; //number of rabbits in the category
     double survivalRate; //survival rate
@@ -13,7 +13,7 @@ private:
     double getSurvivalRate();
 
 public:
-    RabbitCategory(bool gender, int months);
+    RabbitCategory(bool gender, int month);
     int getMonths();
     bool getGender();
     int getNbRabbits();
