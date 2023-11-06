@@ -44,34 +44,50 @@ int Simulation::getNbCouples()
 
 int Simulation::genRandBabys()
 {
-    return (int) rand_int_uniform(4, 7);
+    return (int) rand_int_uniform(3, 7);
+}
+
+int Simulation::genRandLitters()
+{
+    double r = genrand_real1();
+
+    if (r < 0.125) return 4;
+    else if (r < 0.25) return 8;
+    return 5 + (r-0.25)/0.25;
 }
 
 void Simulation::howManyBabys()
 {
     int couples = getNbCouples();
+    int litters = 0;
+    for (int i = 0; i < couples; i++)
+    {
+        litters += genRandLitters();
+    }
+
+    int littersPerMonth[MONTH_PER_YEAR];
+    for (int i = 0; i < MONTH_PER_YEAR; i++)
+        littersPerMonth[i] = litters/MONTH_PER_YEAR;
+
+    for (int i = 0; i < litters%MONTH_PER_YEAR; i++)
+        littersPerMonth[rand_int_uniform(0, MONTH_PER_YEAR)]++;
+     
     int babys;
 
     for (int i = 0; i < MONTH_PER_YEAR; i++)
     {
         maleNextYear  [i] = 0;
         femaleNextYear[i] = 0;
-        for (int j = 0; j < couples/MONTH_PER_YEAR; j++)
+        for (int j = 0; j < littersPerMonth[i]; j++)
         {
-            int r = genrand_int32();
-            int portes = r < 0.7 ? 2 : 1; 
-            for (int m = 0; m < portes; m++)
+            babys = genRandBabys();
+            for (int k = 0; k < babys; k++)
             {
-                babys = genRandBabys();
-                for (int k = 0; k < babys; k++)
-                {
-                    if (rand_int_uniform(0, 2) == 0)
-                        maleNextYear  [i]++;
-                    else
-                        femaleNextYear[i]++;
-                }
+                if (rand_int_uniform(0, 2) == 0)
+                    maleNextYear  [i]++;
+                else
+                    femaleNextYear[i]++;
             }
         }
     }
-    
 }

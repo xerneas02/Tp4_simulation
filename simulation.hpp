@@ -23,6 +23,7 @@ private:
     int  getNbCouples();
     int  genRandBabys();
     void howManyBabys();
+    int  genRandLitters();
     
 
 public:
