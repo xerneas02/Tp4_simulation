@@ -1,5 +1,6 @@
 #include <iostream>
 #include "rabbitCategory.hpp"
+#include "mt.hpp"
 
 
 RabbitCategory::RabbitCategory(int month) : 
@@ -27,7 +28,17 @@ void RabbitCategory::addRabbits(int male, int female)
 
 void RabbitCategory::transferRabbit(RabbitCategory * category)
 {
-    // TODO
+    int nbRabit = category->getNbRabbits();
+    survivalRate = getSurvivalRate();
+    int iterMax = (male > female) ? male : female;
+    int maleTemp = 0; int femaleTemp = 0;
+    
+    for (int i = 0; i < iterMax; i++)
+    {
+        maleTemp += (i < male) && (genrand_real1() < survivalRate);
+        femaleTemp += (i < female) && (genrand_real1() < survivalRate);
+    }
+    category->addRabbits(male, female);
 }
 
 int RabbitCategory::getMonths()

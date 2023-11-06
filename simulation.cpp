@@ -23,7 +23,7 @@ void Simulation::nextMonth()
         howManyBabys();
     }
     
-    for (int i = MAX_CATEGORY-1; i >= 0; i--)
+    for (int i = MAX_CATEGORY-2; i >= 0; i--)
     {
         categories[i]->transferRabbit(categories[i+1]);
     }
@@ -34,7 +34,7 @@ void Simulation::nextMonth()
 int Simulation::getNbCouples()
 {
     int females = 0;
-    for (int i = START_AGE; i < MAX_CATEGORY; i++)
+    for (int i = MAJORITY; i < MAX_CATEGORY; i++)
     {
         females += categories[i]->getFemale();
     }
@@ -44,7 +44,7 @@ int Simulation::getNbCouples()
 
 int Simulation::genRandBabys()
 {
-    return (int) rand_reel_uniform(4, 7);
+    return (int) rand_int_uniform(4, 7);
 }
 
 void Simulation::howManyBabys()
