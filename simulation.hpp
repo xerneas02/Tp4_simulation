@@ -20,9 +20,9 @@ private:
     int nbRabbits; 
     RabbitCategory * categories[MAX_CATEGORY]; // rabbits categories
 
-    int getNbCouples();
-    int genRandBabys();
-    int howManyBabys();
+    int  getNbCouples();
+    int  genRandBabys();
+    void howManyBabys();
     
 
 public:

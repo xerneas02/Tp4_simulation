@@ -270,3 +270,17 @@ double rand_reel_uniform(double min, double max)
     double r = genrand_real2();
     return min + r * (max - min);
 }
+
+/**
+ * @brief Génère un nombre entier aléatoire uniformément distribué entre deux valeurs spécifiées. [min, max[
+ *
+ * @param min La valeur minimale de la plage de valeurs à générer.
+ * @param max La valeur maximale de la plage de valeurs à générer.
+ *
+ * @return Un nombre entier aléatoire uniformément distribué entre min et max.
+ */
+double rand_int_uniform(int min, int max)
+{
+    int r = genrand_int32();
+    return min + r%(max - min);
+}

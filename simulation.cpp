@@ -47,25 +47,28 @@ int Simulation::genRandBabys()
     return (int) rand_reel_uniform(4, 7);
 }
 
-int Simulation::howManyBabys()
+void Simulation::howManyBabys()
 {
     int couples = getNbCouples();
-    int nbBabys  = couples + couples*(7/12);
     int babys;
 
     for (int i = 0; i < MONTH_PER_YEAR; i++)
     {
-        for (int j = 0; j < nbBabys/MONTH_PER_YEAR; j++)
+        for (int j = 0; j < couples/MONTH_PER_YEAR; j++)
         {
-            babys = genRandBabys();
-            for (int k = 0; k < babys; k++)
+            int r = genrand_int32();
+            int portes = r < 0.7 ? 2 : 1; 
+            for (int m = 0; m < portes; m++)
             {
-                if (genrand_real1() > 0.5)
-                    maleNextYear  [j]++;
-                else
-                    femaleNextYear[j]++;
+                babys = genRandBabys();
+                for (int k = 0; k < babys; k++)
+                {
+                    if (rand_int_uniform(0, 2) == 0)
+                        maleNextYear  [i]++;
+                    else
+                        femaleNextYear[i]++;
+                }
             }
-            
         }
     }
     
