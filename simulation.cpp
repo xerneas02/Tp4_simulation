@@ -54,6 +54,8 @@ void Simulation::howManyBabys()
 
     for (int i = 0; i < MONTH_PER_YEAR; i++)
     {
+        maleNextYear  [i] = 0;
+        femaleNextYear[i] = 0;
         for (int j = 0; j < couples/MONTH_PER_YEAR; j++)
         {
             int r = genrand_int32();
