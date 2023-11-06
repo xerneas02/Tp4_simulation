@@ -6,6 +6,8 @@ RabbitCategory::RabbitCategory(int month) :
     month(month)
 {
     survivalRate = getSurvivalRate();
+    male   = 0;
+    female = 0;
 }
 
 double RabbitCategory::getSurvivalRate()

@@ -279,7 +279,7 @@ double rand_reel_uniform(double min, double max)
  *
  * @return Un nombre entier aléatoire uniformément distribué entre min et max.
  */
-double rand_int_uniform(int min, int max)
+int rand_int_uniform(int min, int max)
 {
     int r = genrand_int32();
     return min + r%(max - min);
