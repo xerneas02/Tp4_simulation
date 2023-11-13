@@ -17,6 +17,10 @@ private:
     ull nbYears; // simulation's number of years
     ull month; // current month
     ull nbRabbits; 
+
+    ull maleStart;
+    ull femaleStart;
+
     RabbitCategory * categories[MAX_CATEGORY]; // rabbits categories
 
     ull  getNbCouples();
@@ -27,6 +31,7 @@ private:
 
 public:
     Simulation(ull nMales, ull nFemales);
+    void reset();
     void nextMonth();
     ull  getNbRabbits();
     RabbitCategory * getCategory(ull i);

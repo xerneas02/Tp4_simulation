@@ -16,7 +16,26 @@ Simulation::Simulation(ull nMales, ull nFemales)
         maleNextYear[i] = 0;
         femaleNextYear[i] = 0;
     }
+
+    maleStart = nMales;
+    femaleStart = nFemales;
         
+}
+
+void Simulation::reset()
+{
+    for (ull i = 0; i < MAX_CATEGORY; i++)
+    {
+        categories[i]->addRabbits(0, 0);
+    }
+
+    categories[START_AGE]->addRabbits(maleStart, femaleStart);
+
+    for (ull i = 0; i < MONTH_PER_YEAR; i++)
+    {
+        maleNextYear[i] = 0;
+        femaleNextYear[i] = 0;
+    }
 }
 
 
@@ -31,7 +50,7 @@ void Simulation::nextMonth()
     for (int i = MAX_CATEGORY-2; i >= 0; i--)
     {
         categories[i]->transferRabbit(categories[i+1]);
-    }
+    } 
 
     categories[0]->addRabbits(maleNextYear[month], femaleNextYear[month]);
 
@@ -117,13 +136,8 @@ void Simulation::howManyBabys()
             babys = genRandBabys() *  (MAX_LOOP < littersPerMonth[i] ? (float) littersPerMonth[i] / MAX_LOOP : 1);
             total += babys;
             
-            for (ull k = 0; k < (MAX_LOOP < babys ? MAX_LOOP : babys); k++)
-            {
-                if (rand_int_uniform(0, 2) == 0)
-                    maleNextYear  [i] += (MAX_LOOP < babys ? (float) babys / MAX_LOOP : 1);
-                else
-                    femaleNextYear[i] += (MAX_LOOP < babys ? (float) babys / MAX_LOOP : 1);
-            }
+            maleNextYear  [i] += babys/2;
+            femaleNextYear[i] += babys/2;
         }
     }
 }
