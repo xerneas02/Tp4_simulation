@@ -3,6 +3,8 @@
 #include <cstring>
 #include "latex.h"
 
+int nFig = 0;
+
 char* escapeCharacters(const char* input) {
     size_t len = strlen(input);
     char* result = (char*)malloc(2 * len + 1);
@@ -91,7 +93,7 @@ void LatexFile::addFigure(long double * data, unsigned long long size, int stepx
     file << "\n};\n";
     
 
-    file << "\\end{axis}\n\\end{tikzpicture}\n\\caption{" << titleTmp << "}\n\\label{fig:figName}\n\\end{figure}\n"; 
+    file << "\\end{axis}\n\\end{tikzpicture}\n\\caption{" << titleTmp << "}\n\\label{fig:figName"<< nFig++ <<"}\n\\end{figure}\n"; 
 
 
     free(xLabelTmp);
