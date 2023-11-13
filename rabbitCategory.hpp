@@ -6,24 +6,26 @@
 #define MAJORITY 8
 #define MONTH_PER_YEAR 12
 
+#define ull unsigned long long
+
 class RabbitCategory
 {
 private:
-    int month;   //age in months
-    int male; //number of male rabbit
-    int female; //number of female rabbit
+    ull month;   //age in months
+    ull male; //number of male rabbit
+    ull female; //number of female rabbit
     double survivalRate; //survival rate
 
     double getSurvivalRate();
 
 public:
-    RabbitCategory(int month);
-    int getMonths();
-    int getMale();
-    int getFemale();
-    int getNbRabbits();
+    RabbitCategory(ull month);
+    ull getMonths();
+    ull getMale();
+    ull getFemale();
+    ull getNbRabbits();
     void transferRabbit(RabbitCategory * category); 
-    void addRabbits(int male, int female);
+    void addRabbits(ull male, ull female);
 };
 
 #endif

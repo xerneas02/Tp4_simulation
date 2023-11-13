@@ -3,7 +3,7 @@
 
 #define MAX_CATEGORY 20*12
 #define START_AGE 12
-#define ull unsigned long long
+
 
 
 

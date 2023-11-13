@@ -22,13 +22,11 @@ Simulation::Simulation(ull nMales, ull nFemales)
 
 void Simulation::nextMonth()
 {
-    if (month%MONTH_PER_YEAR == 0)
+    if (month == 0)
     {
-        month = 0;
         nbYears++;
         howManyBabys();
     }
-    month++;
 
     for (int i = MAX_CATEGORY-2; i >= 0; i--)
     {
@@ -36,17 +34,22 @@ void Simulation::nextMonth()
     }
 
     categories[0]->addRabbits(maleNextYear[month], femaleNextYear[month]);
+
+    month = (month + 1) % MONTH_PER_YEAR;
 }
 
 ull Simulation::getNbCouples()
 {
     ull females = 0;
+    ull males   = 0;
     for (ull i = MAJORITY; i < MAX_CATEGORY; i++)
     {
         females += categories[i]->getFemale();
+        males   += categories[i]->getMale();
     }
-    
-    return females;
+    males *= 10;
+
+    return females < males ? females : males;
 }
 
 RabbitCategory * Simulation::getCategory(ull i)
@@ -60,7 +63,6 @@ ull Simulation::getNbRabbits()
     for (ull i = 0; i < MAX_CATEGORY; i++)
     {
         rabbits += categories[i]->getNbRabbits();
-        //prullf("%d : %d\n", i, categories[i]->getNbRabbits());
     }
     
     
@@ -95,13 +97,16 @@ void Simulation::howManyBabys()
     litters *= (MAX_LOOP < couples ? (float) couples / MAX_LOOP : 1);
 
     ull littersPerMonth[MONTH_PER_YEAR];
-    for (ull i = 0; i < MONTH_PER_YEAR; i++)
+    for (ull i = 0; i < MONTH_PER_YEAR; i++){
         littersPerMonth[i] = litters/MONTH_PER_YEAR;
+    }
 
-    for (ull i = 0; i < litters%MONTH_PER_YEAR; i++)
+    for (ull i = 0; i < litters%MONTH_PER_YEAR; i++){
         littersPerMonth[rand_int_uniform(0, MONTH_PER_YEAR)]++;
+    }
      
     ull babys;
+    ull total = 0;
 
     for (ull i = 0; i < MONTH_PER_YEAR; i++)
     {
@@ -110,6 +115,8 @@ void Simulation::howManyBabys()
         for (ull j = 0; j < (MAX_LOOP < littersPerMonth[i] ? MAX_LOOP : littersPerMonth[i]); j++)
         {
             babys = genRandBabys() *  (MAX_LOOP < littersPerMonth[i] ? (float) littersPerMonth[i] / MAX_LOOP : 1);
+            total += babys;
+            
             for (ull k = 0; k < (MAX_LOOP < babys ? MAX_LOOP : babys); k++)
             {
                 if (rand_int_uniform(0, 2) == 0)
