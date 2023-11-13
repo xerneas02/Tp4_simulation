@@ -1,6 +1,8 @@
 #include "main.hpp"
 #include "simulation.hpp"
+#include <fstream>
 #include <ctime>
+#include "latex/latex.h"
 
 int main()
 {
@@ -23,7 +25,7 @@ int main()
         for (int i = 0; i < NUMBER_OF_YEAR*MONTH_PER_YEAR; i++)
         {
             totalPerMonth[i] += (long double)sim->getNbRabbits()/nbSimu;
-            sim->nextMonth();        
+            sim->nextMonth();
         }
 
         for (int i = 0; i < MAX_CATEGORY; i++)
@@ -47,7 +49,13 @@ int main()
         printf("Category: %d - %Lf\n", i, totalPerCategory[i]);       
     }
 
-    
+
+    LatexFile *file = new LatexFile("LatexTest.tex");
+    file->addSection("Test");
+
+    file->addFigure(totalPerMonth, NUMBER_OF_YEAR*MONTH_PER_YEAR, 10);
+
+    file->closeLatex();
     
 
     return 0;
