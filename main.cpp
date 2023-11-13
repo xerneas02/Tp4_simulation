@@ -53,7 +53,7 @@ int main()
     LatexFile *file = new LatexFile("LatexTest.tex");
     file->addSection("Test");
 
-    file->addFigure(totalPerMonth, NUMBER_OF_YEAR*MONTH_PER_YEAR, 10);
+    file->addFigure(totalPerMonth, NUMBER_OF_YEAR*MONTH_PER_YEAR, 10, 1000000000, 0, NUMBER_OF_YEAR*MONTH_PER_YEAR, 0, 30000000000, "Mois", "Milliard de lapins", "Evolution du nombre de lapin sur 20ans");
 
     file->closeLatex();
     
