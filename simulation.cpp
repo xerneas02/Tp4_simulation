@@ -9,7 +9,7 @@ Simulation::Simulation(ull nMales, ull nFemales)
         categories[i] = new RabbitCategory(i);
     }
 
-    categories[START_AGE]->addRabbits(nMales, nFemales);
+    categories[START_AGE]->setRabbits(nMales, nFemales);
 
     for (ull i = 0; i < MONTH_PER_YEAR; i++)
     {
@@ -26,10 +26,10 @@ void Simulation::reset()
 {
     for (ull i = 0; i < MAX_CATEGORY; i++)
     {
-        categories[i]->addRabbits(0, 0);
+        categories[i]->setRabbits(0, 0);
     }
 
-    categories[START_AGE]->addRabbits(maleStart, femaleStart);
+    categories[START_AGE]->setRabbits(maleStart, femaleStart);
 
     for (ull i = 0; i < MONTH_PER_YEAR; i++)
     {
@@ -52,7 +52,7 @@ void Simulation::nextMonth()
         categories[i]->transferRabbit(categories[i+1]);
     } 
 
-    categories[0]->addRabbits(maleNextYear[month], femaleNextYear[month]);
+    categories[0]->setRabbits(maleNextYear[month], femaleNextYear[month]);
 
     month = (month + 1) % MONTH_PER_YEAR;
 }

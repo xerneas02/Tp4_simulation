@@ -24,7 +24,7 @@ double RabbitCategory::getSurvivalRate()
     return 0.0;
 }
 
-void RabbitCategory::addRabbits(ull male, ull female)
+void RabbitCategory::setRabbits(ull male, ull female)
 {
     this->male = male;
     this->female = female;
@@ -47,7 +47,7 @@ void RabbitCategory::transferRabbit(RabbitCategory * category)
     }
 
     femaleTemp *= (MAX_LOOP < female ? (float) female / MAX_LOOP : 1);
-    category->addRabbits(maleTemp, femaleTemp);
+    category->setRabbits(maleTemp, femaleTemp);
 
     male = 0;
     female = 0;
