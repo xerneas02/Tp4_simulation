@@ -1,6 +1,8 @@
 #include <iostream>
 #include "rabbitCategory.hpp"
 #include "mt.hpp"
+#include <math.h>
+
 
 
 RabbitCategory::RabbitCategory(int month) : 
@@ -13,12 +15,12 @@ RabbitCategory::RabbitCategory(int month) :
 
 double RabbitCategory::getSurvivalRate()
 {
-    if (getMonths() < 6)
-        return pow(0.35, 1/4096); 
-    else if (getMonths() < 120)
-        return pow(0.6, 1/4096);
-    else if(getMonths() < 180)
-        return pow(0.1, 1/4096);
+    if (getMonths() < MAJORITY)
+        return pow(0.35, 1.0/MONTH_PER_YEAR); 
+    else if (getMonths() < MONTH_PER_YEAR * 10)
+        return pow(0.6, 1.0/MONTH_PER_YEAR);
+    else if(getMonths() < MONTH_PER_YEAR * 15)
+        return pow(0.6 - 0.1 * (month/MONTH_PER_YEAR - 15), 1.0/MONTH_PER_YEAR);
     return 0.0;
 }
 
@@ -30,17 +32,27 @@ void RabbitCategory::addRabbits(int male, int female)
 
 void RabbitCategory::transferRabbit(RabbitCategory * category)
 {
-    int nbRabit = category->getNbRabbits();
     survivalRate = getSurvivalRate();
-    int iterMax = (male > female) ? male : female;
     int maleTemp = 0; int femaleTemp = 0;
     
-    for (int i = 0; i < iterMax; i++)
+    for (int i = 0; i < (MAX_LOOP < male ? MAX_LOOP : male); i++)
     {
-        maleTemp += (i < male) && (genrand_real1() < survivalRate);
-        femaleTemp += (i < female) && (genrand_real1() < survivalRate);
+        maleTemp += (genrand_real1() < survivalRate);
     }
-    category->addRabbits(male, female);
+
+    maleTemp *= (MAX_LOOP < male ? (float) male / MAX_LOOP : 1);
+
+    for (int i = 0; i < (MAX_LOOP < female ? MAX_LOOP : female); i++)
+    {
+        femaleTemp += (genrand_real1() < survivalRate);
+    }
+
+    femaleTemp *= (MAX_LOOP < female ? (float) female / MAX_LOOP : 1);
+
+    male = 0;
+    female = 0;
+
+    category->addRabbits(maleTemp, femaleTemp);
 }
 
 int RabbitCategory::getMonths()
@@ -62,3 +74,5 @@ int RabbitCategory::getNbRabbits()
 {
     return male + female;
 }
+
+

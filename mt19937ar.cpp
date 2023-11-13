@@ -281,6 +281,6 @@ double rand_reel_uniform(double min, double max)
  */
 int rand_int_uniform(int min, int max)
 {
-    int r = genrand_int32();
-    return min + r%(max - min);
+    int r = genrand_int31();
+    return min + (r%(max - min));
 }

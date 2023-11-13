@@ -3,8 +3,7 @@
 
 #define MAX_CATEGORY 20*12
 #define START_AGE 12
-#define MONTH_PER_YEAR 12
-#define MAJORITY 8
+#define ull unsigned long long
 
 
 
@@ -13,23 +12,24 @@
 class Simulation
 {
 private:
-    int maleNextYear  [MONTH_PER_YEAR];
-    int femaleNextYear[MONTH_PER_YEAR];
-    int nbYears; // simulation's number of years
-    int month; // current month
-    int nbRabbits; 
+    ull maleNextYear  [MONTH_PER_YEAR];
+    ull femaleNextYear[MONTH_PER_YEAR];
+    ull nbYears; // simulation's number of years
+    ull month; // current month
+    ull nbRabbits; 
     RabbitCategory * categories[MAX_CATEGORY]; // rabbits categories
 
-    int  getNbCouples();
-    int  genRandBabys();
+    ull  getNbCouples();
+    ull  genRandBabys();
     void howManyBabys();
-    int  genRandLitters();
+    ull  genRandLitters();
     
 
 public:
-    Simulation(int nMales, int nFemales);
+    Simulation(ull nMales, ull nFemales);
     void nextMonth();
-    
+    ull  getNbRabbits();
+    RabbitCategory * getCategory(ull i);
 };
 
 #endif
