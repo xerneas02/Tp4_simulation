@@ -25,7 +25,7 @@ public:
     ull getFemale();
     ull getNbRabbits();
     void transferRabbit(RabbitCategory * category); 
-    void addRabbits(ull male, ull female);
+    void setRabbits(ull male, ull female);
 };
 
 #endif
