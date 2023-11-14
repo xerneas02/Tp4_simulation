@@ -17,6 +17,7 @@ int main()
     long double total = 0;
     int nbSimu = 1000;
 
+    long double resSimus[nbSimu];
     long double totalPerMonth[NUMBER_OF_YEAR*MONTH_PER_YEAR] = {0};
     long double totalPerCategory[MAX_CATEGORY] = {0};
 
@@ -34,6 +35,7 @@ int main()
             totalPerCategory[i] += (long double)sim->getCategory(i)->getNbRabbits()/nbSimu;
         }
         
+        resSimus[j] = sim->getNbRabbits();
         total += (long double)sim->getNbRabbits()/nbSimu;
 
         sim->reset();
@@ -66,26 +68,7 @@ int main()
     
     file->addFigure(logTotalPerMonth, NUMBER_OF_YEAR*MONTH_PER_YEAR, 10, 1, 0, NUMBER_OF_YEAR*MONTH_PER_YEAR, 0, 12, "Mois", "log(nombres de lapins)", "Evolution du nombre de lapin sur 20ans (echelle log)");
 
-    long double percentageTotalPerMonth[NUMBER_OF_YEAR*MONTH_PER_YEAR];
-    for (int i = 0; i < NUMBER_OF_YEAR*MONTH_PER_YEAR; i++)
-    {
-        percentageTotalPerMonth[i] = totalPerMonth[i]/sum * 100;
-    }
-
-    file->addFigure(percentageTotalPerMonth, NUMBER_OF_YEAR*MONTH_PER_YEAR, 10, 10, 0, NUMBER_OF_YEAR*MONTH_PER_YEAR, 0, 100, "Mois", "Pourcentage de lapins", "Evolution du nombre de lapin sur 20ans en %");
-
-    for (int i = 0; i < MAX_CATEGORY; i++)
-    {
-        sum += totalPerCategory[i];
-    }
-
-    for (int i = 0; i < MAX_CATEGORY; i++)
-    {
-        percentageTotalPerMonth[i] = totalPerCategory[i]/sum * 100;
-    }
-
-    file->addFigure(percentageTotalPerMonth, MAX_CATEGORY, 10, 10, 0, MAX_CATEGORY, 0, 100, "Age en mois", "Pourcentage de lapins", "Pourcentage de lapin dans chaques categories d'age après 20ans");
-
+    file->addFigure(resSimus, nbSimu, 100, 1000000000, 0, nbSimu, 0, 40000000000, "Nombre de simulation", "Nombre de lapins aprés 20ans", "Gaussienne");
 
     file->closeLatex();
     
