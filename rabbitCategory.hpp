@@ -2,7 +2,7 @@
 
 #define RABBIT_CATEGORY_H
 
-#define MAX_LOOP 100
+#define MAX_LOOP 200
 #define MAJORITY 8
 #define MONTH_PER_YEAR 12
 

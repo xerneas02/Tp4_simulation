@@ -15,15 +15,16 @@ int main()
 
     Simulation * sim = new Simulation(5, 5);
     long double total = 0;
-    int nbSimu = 1000;
+    int nbSimu = 50000;
 
-    long double resSimus[nbSimu];
+
+    long double * resSimus = (long double*) malloc(sizeof(long double) * nbSimu);
     long double totalPerMonth[NUMBER_OF_YEAR*MONTH_PER_YEAR] = {0};
     long double totalPerCategory[MAX_CATEGORY] = {0};
 
     for (int j = 0; j < nbSimu; j++)
     {
-        printf("%d/%d\n", j, nbSimu);
+        if(j%100 == 0)printf("%d/%d\n", j, nbSimu);
         for (int i = 0; i < NUMBER_OF_YEAR*MONTH_PER_YEAR; i++)
         {
             totalPerMonth[i] += (long double)sim->getNbRabbits()/nbSimu;
@@ -68,9 +69,28 @@ int main()
     
     file->addFigure(logTotalPerMonth, NUMBER_OF_YEAR*MONTH_PER_YEAR, 10, 1, 0, NUMBER_OF_YEAR*MONTH_PER_YEAR, 0, 12, "Mois", "log(nombres de lapins)", "Evolution du nombre de lapin sur 20ans (echelle log)");
 
-    file->addFigure(resSimus, nbSimu, 100, 1000000000, 0, nbSimu, 0, 40000000000, "Nombre de simulation", "Nombre de lapins aprés 20ans", "Gaussienne");
+    int nbTranches = 128;//nbSimu/200;
+    long double resByTranche[nbTranches] = {0};
+    long long max = 0;
+    unsigned long long maxValue = total*2;
+    for (int i = 0; i < nbSimu; i++)
+    {
+        int index = (int) ((float)resSimus[i]/(((float)maxValue)/nbTranches));
+        resByTranche[index]++;
+        if (resByTranche[index] > max && index < nbTranches) 
+        {
+            max = resByTranche[index];
+        }
+        
+    }
+    
+    printf("max = %lld\n", max);
+
+    file->addFigure(resByTranche, nbTranches, 1, 100, 0, nbTranches, 0, max + max*0.1, "Nombre de lapins aprés 20ans", "Nombre de simulation", "Gaussienne");
 
     file->closeLatex();
+
+    free(resSimus);
     
 
     return 0;
