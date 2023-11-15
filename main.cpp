@@ -15,18 +15,19 @@ int main()
 
     Simulation * sim = new Simulation(5, 5);
     long double total = 0;
-    int nbSimu = 20000;
+    int nbSimu = 1000;
+    int numberOfYears = NUMBER_OF_YEAR;
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 3; i++)
     {  
-        int numberOfYears = NUMBER_OF_YEAR+(i);
+        if(i != 0) numberOfYears *= 2;
         long double * resSimus = (long double*) malloc(sizeof(long double) * nbSimu);
         long double totalPerMonth[numberOfYears*MONTH_PER_YEAR] = {0};
         long double totalPerCategory[MAX_CATEGORY] = {0};
 
         for (int j = 0; j < nbSimu; j++)
         {
-            if(j%10000 == 0)printf("%d : %d/%d\n", i, j, nbSimu);
+            if(j%1 == 0)printf("%d : %d/%d\n", i, j, nbSimu);
             for (int k = 0; k < numberOfYears*MONTH_PER_YEAR; k++)
             {
                 totalPerMonth[k] += (long double)sim->getNbRabbits()/nbSimu;
@@ -57,7 +58,7 @@ int main()
         }
         */
         char name[20];
-        sprintf(name, "Graph%d.tex", i+NUMBER_OF_YEAR);
+        sprintf(name, "Graph%d.tex", (i+1)*NUMBER_OF_YEAR);
 
         LatexFile *file = new LatexFile(name);
         /*
@@ -78,13 +79,23 @@ int main()
         int nbTranches = 4;
         int totalValid = 0;
 
-        for (int k = 0; k < 5; k++)
+        for (int k = 0; k < 6; k++)
         {
             nbTranches *= 2;
+            
             long double resByTranche[nbTranches] = {0};
             long long max = 0;
             unsigned long long maxValue = total*2;
-            
+
+            if(k == 5)
+            {
+                int tmp = 100;
+                if(i == 1) tmp = 10000;
+                if(i == 2) tmp = 1000000;
+                nbTranches = maxValue/tmp;
+                printf("%d\n", nbTranches);
+            }
+
             for (int j = 0; j < nbSimu; j++)
             {
                 int index = (int) (resSimus[j]/(((float)maxValue)/nbTranches));
@@ -111,11 +122,15 @@ int main()
 
             char titre[200];
             sprintf(titre, "Gaussienne pressision : %d", nbTranches);
+            char titrex[200];
+            sprintf(titrex, "Nombres de lapins aprés %dans (Max = %llu)", numberOfYears, maxValue);
 
-            file->addFigure(resByTranche, nbTranches, 1, 100, 0, nbTranches, 0, max + 200, "Nombre de lapins aprés 20ans", "Nombre de simulation", titre);
+            file->addFigure(resByTranche, nbTranches, 1, 100, 0, nbTranches, 0, max + max*0.1, titrex, "Nombre de simulation", titre);
         }
 
-        printf("Nombre total de resultat valide : %d / %d\n", totalValid, 5*nbSimu);
+        
+
+        printf("Nombre total de resultat valide : %d\n", totalValid);
         file->closeLatex();
 
         free(resSimus);

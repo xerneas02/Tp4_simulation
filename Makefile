@@ -34,4 +34,5 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 # 	mkdir -p $(OBJDIR) $(BINDIR)
 
 clean:
-	rm -rf $(OBJDIR)/*.o $(EXECUTABLE)
+	rm $(OBJDIR)/*.o
+	rm $(OBJDIR)/latex/*.o
