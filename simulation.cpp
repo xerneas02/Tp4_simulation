@@ -1,6 +1,7 @@
 #include "simulation.hpp"
 #include "rabbitCategory.hpp"
 #include  "mt.hpp"
+#include <math.h>
 
 Simulation::Simulation(ull nMales, ull nFemales)
 {
@@ -19,6 +20,8 @@ Simulation::Simulation(ull nMales, ull nFemales)
 
     maleStart = nMales;
     femaleStart = nFemales;
+
+    ecartType = 1200;
         
 }
 
@@ -108,12 +111,19 @@ void Simulation::howManyBabys()
     ull couples = getNbCouples();
     ull litters = 0;
 
-    for (ull i = 0; i < (MAX_LOOP < couples ? MAX_LOOP : couples); i++)
+    if (couples < MAX_LOOP)
     {
-        litters += genRandLitters();
+        for (ull i = 0; i < couples; i++)
+        {
+            litters += genRandLitters();
+        }
     }
-
-    litters *= (MAX_LOOP < couples ? (float) couples / MAX_LOOP : 1);
+    else 
+    {
+        litters = genererGaussienne(couples*6, ecartType);
+    }
+    
+        
 
     ull littersPerMonth[MONTH_PER_YEAR];
     for (ull i = 0; i < MONTH_PER_YEAR; i++){
@@ -125,19 +135,25 @@ void Simulation::howManyBabys()
     }
      
     ull babys;
-    ull total = 0;
 
     for (ull i = 0; i < MONTH_PER_YEAR; i++)
     {
+        babys = 0;
         maleNextYear  [i] = 0;
         femaleNextYear[i] = 0;
-        for (ull j = 0; j < (MAX_LOOP < littersPerMonth[i] ? MAX_LOOP : littersPerMonth[i]); j++)
+        if (littersPerMonth[i] < MAX_LOOP)
         {
-            babys = genRandBabys() *  (MAX_LOOP < littersPerMonth[i] ? (float) littersPerMonth[i] / MAX_LOOP : 1);
-            total += babys;
-            
-            maleNextYear  [i] += babys/2;
-            femaleNextYear[i] += babys/2;
+            for (ull j = 0; j < littersPerMonth[i]; j++)
+            {
+                babys += genRandBabys();
+                
+            }
         }
+        else
+        {
+            babys = genererGaussienne(littersPerMonth[i]*4.5, ecartType);
+        }                
+        maleNextYear  [i] += babys/2;
+        femaleNextYear[i] += babys/2;
     }
 }

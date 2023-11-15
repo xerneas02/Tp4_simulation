@@ -18,7 +18,7 @@ int main()
     int nbSimu = 1000;
     int numberOfYears = NUMBER_OF_YEAR;
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {  
         if(i != 0) numberOfYears *= 2;
         long double * resSimus = (long double*) malloc(sizeof(long double) * nbSimu);
@@ -27,11 +27,12 @@ int main()
 
         for (int j = 0; j < nbSimu; j++)
         {
-            if(j%1 == 0)printf("%d : %d/%d\n", i, j, nbSimu);
+            if(j%100 == 0)printf("%d : %d/%d\n", i, j, nbSimu);
             for (int k = 0; k < numberOfYears*MONTH_PER_YEAR; k++)
             {
                 totalPerMonth[k] += (long double)sim->getNbRabbits()/nbSimu;
                 sim->nextMonth();
+                //if(k%1000 == 0) printf("%d : %llu (%lluM)\n", k, sim->getNbRabbits(), sim->getNbRabbits()/1000000000);
             }
 
             for (int k = 0; k < MAX_CATEGORY; k++)
@@ -58,7 +59,7 @@ int main()
         }
         */
         char name[20];
-        sprintf(name, "Graph%d.tex", (i+1)*NUMBER_OF_YEAR);
+        sprintf(name, "Graph%d.tex", numberOfYears);
 
         LatexFile *file = new LatexFile(name);
         /*
@@ -76,10 +77,10 @@ int main()
         
         file->addFigure(logTotalPerMonth, numberOfYears*MONTH_PER_YEAR, 10, 1, 0, numberOfYears*MONTH_PER_YEAR, 0, 12, "Mois", "log(nombres de lapins)", "Evolution du nombre de lapin sur 20ans (echelle log)");
         */    
-        int nbTranches = 4;
+        int nbTranches = 8;
         int totalValid = 0;
 
-        for (int k = 0; k < 6; k++)
+        for (int k = 0; k < 5; k++)
         {
             nbTranches *= 2;
             
@@ -87,11 +88,11 @@ int main()
             long long max = 0;
             unsigned long long maxValue = total*2;
 
-            if(k == 5)
+            if(k == 4)
             {
                 int tmp = 100;
                 if(i == 1) tmp = 10000;
-                if(i == 2) tmp = 1000000;
+                if(i == 2) tmp = 1000000000;
                 nbTranches = maxValue/tmp;
                 printf("%d\n", nbTranches);
             }

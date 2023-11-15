@@ -42,7 +42,6 @@
 */
 
 #include <stdio.h>
-#include <math.h>
 #include "mt.hpp"
 
 /* Period parameters */  
@@ -302,6 +301,10 @@ double genererGaussienne(double moyenne, double sigma) {
         r = sqrt(-2.0 * log(u1 + EPSILON));
         theta = TWO_PI * u2;
     } while (r > 1.0 || r == 0.0);
+
+    // Box-Muller transform
+    secondValue = r * sin(theta);
+    flip = 1;
 
     return moyenne + sigma * (r * cos(theta));
 }

@@ -30,9 +30,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Commentez ou supprimez cette règle pour éviter de créer les dossiers
-# directories:
+#directories:
 # 	mkdir -p $(OBJDIR) $(BINDIR)
 
 clean:
-	rm $(OBJDIR)/*.o
-	rm $(OBJDIR)/latex/*.o
+	del $(OBJDIR)\*.o
+	del $(OBJDIR)\latex\*.o

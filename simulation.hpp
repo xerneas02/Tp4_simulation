@@ -17,6 +17,7 @@ private:
     ull nbYears; // simulation's number of years
     ull month; // current month
     ull nbRabbits; 
+    double ecartType;
 
     ull maleStart;
     ull femaleStart;

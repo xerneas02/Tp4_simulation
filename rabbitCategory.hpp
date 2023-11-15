@@ -2,7 +2,7 @@
 
 #define RABBIT_CATEGORY_H
 
-#define MAX_LOOP 1000000
+#define MAX_LOOP 10000
 #define MAJORITY 8
 #define MONTH_PER_YEAR 12
 
@@ -15,6 +15,7 @@ private:
     ull male; //number of male rabbit
     ull female; //number of female rabbit
     double survivalRate; //survival rate
+    double ecartType;
 
     double getSurvivalRate();
 

@@ -11,6 +11,8 @@ RabbitCategory::RabbitCategory(ull month) :
     survivalRate = getSurvivalRate();
     male   = 0;
     female = 0;
+
+    ecartType = 480;
 }
 
 double RabbitCategory::getSurvivalRate()
@@ -20,7 +22,7 @@ double RabbitCategory::getSurvivalRate()
     else if (getMonths() < MONTH_PER_YEAR * 10)
         return pow(0.6, 1.0/MONTH_PER_YEAR);
     else if(getMonths() < MONTH_PER_YEAR * 15)
-        return pow(0.6 - 0.1 * (15 - (float)month/MONTH_PER_YEAR), 1.0/MONTH_PER_YEAR);
+        return pow(0.6 - 0.1 * (15 - ((float)month)/MONTH_PER_YEAR), 1.0/MONTH_PER_YEAR);
     return 0.0;
 }
 
@@ -32,21 +34,33 @@ void RabbitCategory::setRabbits(ull male, ull female)
 
 void RabbitCategory::transferRabbit(RabbitCategory * category)
 {
-    ull maleTemp = 0; ull femaleTemp = 0;
+    ull maleTemp = 0; ull femaleTemp = 0;    
     
-    for (ull i = 0; i < (MAX_LOOP < male ? MAX_LOOP : male); i++)
+    if (male < MAX_LOOP) 
     {
-        maleTemp += (genrand_real1() < survivalRate);
+        for (ull i = 0; i < male; i++)
+        {
+            maleTemp += (genrand_real1() < survivalRate);
+        }
+    }
+    else
+    {
+        maleTemp = genererGaussienne(male*survivalRate, 480);
+    }
+    
+
+    if (female < MAX_LOOP) 
+    {
+        for (ull i = 0; i < female; i++)
+        {
+            femaleTemp += (genrand_real1() < survivalRate);
+        }
+    }
+    else
+    {
+        femaleTemp = genererGaussienne(female*survivalRate, 480);
     }
 
-    maleTemp *= (MAX_LOOP < male ? (float) male / MAX_LOOP : 1);
-
-    for (ull i = 0; i < (MAX_LOOP < female ? MAX_LOOP : female); i++)
-    {
-        femaleTemp += (genrand_real1() < survivalRate);
-    }
-
-    femaleTemp *= (MAX_LOOP < female ? (float) female / MAX_LOOP : 1);
     category->setRabbits(maleTemp, femaleTemp);
 
     male = 0;
