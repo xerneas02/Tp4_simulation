@@ -36,7 +36,7 @@ int main() {
     // Initialisation de la simulation avec 5 lapins mâles et 5 lapins femelles.
     Simulation *sim = new Simulation(5, 5);
     long double total = 0;
-    int nbSimu = 280000;
+    int nbSimu = 10000;
     int numberOfYears = NUMBER_OF_YEAR;
 
     // Boucle principale pour différentes configurations de simulation.

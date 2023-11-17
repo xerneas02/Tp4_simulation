@@ -7,7 +7,7 @@
 #include <fstream>
 #include "mt.hpp"
 
-#define NUMBER_OF_YEAR 20
+#define NUMBER_OF_YEAR 5
 
 typedef struct {
     long double total;
