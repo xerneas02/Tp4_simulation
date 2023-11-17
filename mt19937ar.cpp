@@ -286,6 +286,19 @@ int rand_int_uniform(int min, int max)
     return min + (r%(max - min));
 }
 
+/**
+ * @brief Génère un nombre aléatoire suivant une distribution gaussienne.
+ *
+ * Cette fonction utilise l'algorithme de Box-Muller pour générer un nombre
+ * aléatoire suivant une distribution gaussienne avec une moyenne spécifiée
+ * (mean) et un écart-type spécifié (stddev).
+ *
+ * @param mean La moyenne de la distribution gaussienne.
+ * @param stddev L'écart-type de la distribution gaussienne.
+ *
+ * @return Un nombre aléatoire suivant une distribution gaussienne avec la
+ * moyenne et l'écart-type spécifiés.
+ */
 double genererGaussienne(double mean, double stddev) {
     static int hasSpare = 0;
     static double spare;
