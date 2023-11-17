@@ -5,17 +5,28 @@
 #include "math.h"
 #include "latex/latex.h"
 
+int extraireDeuxPremiersChiffres(int nombre) {
+    char nombreStr[12];
+    sprintf(nombreStr, "%d", nombre);
+
+    nombreStr[2] = '\0';
+
+    int deuxPremiersChiffres = atoi(nombreStr);
+
+    return deuxPremiersChiffres;
+}
+
 int main()
 {
     /*----------Initialisation Mersenne Twister----------*/
     unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, 
     length=4;
     init_by_array(init, length);
-    init_genrand(time(NULL));
+    //init_genrand(time(NULL));
 
     Simulation * sim = new Simulation(5, 5);
     long double total = 0;
-    int nbSimu = 1000;
+    int nbSimu = 100000;
     int numberOfYears = NUMBER_OF_YEAR;
 
     for (int i = 0; i < 4; i++)
@@ -77,25 +88,32 @@ int main()
         
         file->addFigure(logTotalPerMonth, numberOfYears*MONTH_PER_YEAR, 10, 1, 0, numberOfYears*MONTH_PER_YEAR, 0, 12, "Mois", "log(nombres de lapins)", "Evolution du nombre de lapin sur 20ans (echelle log)");
         */    
-        int nbTranches = 8;
+        int nbTranches = 4;
         int totalValid = 0;
 
-        for (int k = 0; k < 5; k++)
+        for (int k = 0; k < 6; k++)
         {
             nbTranches *= 2;
+            unsigned long long maxValue = total*2;
+
+            if(k == 5)
+            {
+                nbTranches = extraireDeuxPremiersChiffres(maxValue);
+                printf("%d\n", nbTranches);
+            }
+
+            long double x[nbTranches];
+
+            for (int i = 0; i < nbTranches; i++)
+            {
+                x[i] = (maxValue/nbTranches)*i;
+            }
+            
             
             long double resByTranche[nbTranches] = {0};
             long long max = 0;
-            unsigned long long maxValue = total*2;
-
-            if(k == 4)
-            {
-                int tmp = 100;
-                if(i == 1) tmp = 10000;
-                if(i == 2) tmp = 1000000000;
-                nbTranches = maxValue/tmp;
-                printf("%d\n", nbTranches);
-            }
+            
+            
 
             for (int j = 0; j < nbSimu; j++)
             {
@@ -119,6 +137,7 @@ int main()
                 
             }
             
+            
             printf("max = %lld\n", max);
 
             char titre[200];
@@ -126,7 +145,7 @@ int main()
             char titrex[200];
             sprintf(titrex, "Nombres de lapins aprés %dans (Max = %llu)", numberOfYears, maxValue);
 
-            file->addFigure(resByTranche, nbTranches, 1, 100, 0, nbTranches, 0, max + max*0.1, titrex, "Nombre de simulation", titre);
+            file->addFigure(x, resByTranche, nbTranches, maxValue/10, (max + max*0.1)/10, 0, maxValue, 0, max + max*0.1, titrex, "Nombre de simulation", titre);
         }
 
         

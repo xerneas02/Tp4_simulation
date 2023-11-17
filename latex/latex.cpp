@@ -50,7 +50,7 @@ void LatexFile::addSection(const char * section)
     file << "\n\\section{" << section << "}\n";
 }
 
-void LatexFile::addFigure(long double * data, unsigned long long size, int stepx, int stepy, unsigned long long xmin, unsigned long long xmax, unsigned long long ymin, unsigned long long ymax, const char * xLabel, const char * yLabel, const char * title)
+void LatexFile::addFigure(long double * dataX, long double * dataY , unsigned long long size, int stepx, int stepy, unsigned long long xmin, unsigned long long xmax, unsigned long long ymin, unsigned long long ymax, const char * xLabel, const char * yLabel, const char * title)
 {
     char * xLabelTmp = escapeCharacters(xLabel);
     char * yLabelTmp = escapeCharacters(yLabel);
@@ -88,7 +88,7 @@ void LatexFile::addFigure(long double * data, unsigned long long size, int stepx
     file << "coordinates {\n";
     for (unsigned long long i = 0; i < size; i++)
     {
-        file << "(" << i << "," << data[i] << ")";
+        file << "(" << dataX[i] << "," << dataY[i] << ")";
     }
     file << "\n};\n";
     

@@ -42,6 +42,7 @@
 */
 
 #include <stdio.h>
+#include <math.h>
 #include "mt.hpp"
 
 /* Period parameters */  
@@ -285,26 +286,24 @@ int rand_int_uniform(int min, int max)
     return min + (r%(max - min));
 }
 
-double genererGaussienne(double moyenne, double sigma) {
-    static int flip = 0;
-    static double secondValue = 0.0;
+double genererGaussienne(double mean, double stddev) {
+    static int hasSpare = 0;
+    static double spare;
 
-    if (flip) {
-        flip = 0;
-        return moyenne + sigma * secondValue;
+    if (hasSpare) {
+        hasSpare = 0;
+        return mean + stddev * spare;
+    } else {
+        hasSpare = 1;
+        double u, v, s;
+        do {
+            u = (genrand_real1()) * 2.0 - 1.0;
+            v = (genrand_real1()) * 2.0 - 1.0;
+            s = u * u + v * v;
+        } while (s >= 1.0 || s == 0.0);
+
+        s = sqrt(-2.0 * log(s) / s);
+        spare = v * s;
+        return mean + stddev * u * s;
     }
-
-    double u1, u2, r, theta;
-    do {
-        u1 = genrand_real1();
-        u2 = genrand_real1();
-        r = sqrt(-2.0 * log(u1 + EPSILON));
-        theta = TWO_PI * u2;
-    } while (r > 1.0 || r == 0.0);
-
-    // Box-Muller transform
-    secondValue = r * sin(theta);
-    flip = 1;
-
-    return moyenne + sigma * (r * cos(theta));
 }

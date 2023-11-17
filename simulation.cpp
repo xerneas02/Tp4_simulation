@@ -21,7 +21,7 @@ Simulation::Simulation(ull nMales, ull nFemales)
     maleStart = nMales;
     femaleStart = nFemales;
 
-    ecartType = 1200;
+    ecartType = 20;
         
 }
 
@@ -120,7 +120,7 @@ void Simulation::howManyBabys()
     }
     else 
     {
-        litters = genererGaussienne(couples*6, ecartType);
+        litters = genererGaussienne(couples*6, 380);
     }
     
         
@@ -151,7 +151,7 @@ void Simulation::howManyBabys()
         }
         else
         {
-            babys = genererGaussienne(littersPerMonth[i]*4.5, ecartType);
+            babys = genererGaussienne(littersPerMonth[i]*4.5, 330);
         }                
         maleNextYear  [i] += babys/2;
         femaleNextYear[i] += babys/2;

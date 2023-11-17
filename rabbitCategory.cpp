@@ -12,7 +12,7 @@ RabbitCategory::RabbitCategory(ull month) :
     male   = 0;
     female = 0;
 
-    ecartType = 480;
+    ecartType = 140;
 }
 
 double RabbitCategory::getSurvivalRate()
