@@ -36,7 +36,7 @@ int main() {
     // Initialisation de la simulation avec 5 lapins mâles et 5 lapins femelles.
     Simulation *sim = new Simulation(5, 5);
     long double total = 0;
-    int nbSimu = 10000;
+    int nbSimu = 1000;
     int numberOfYears = NUMBER_OF_YEAR;
 
     // Boucle principale pour différentes configurations de simulation.
@@ -133,7 +133,7 @@ int main() {
             char titre[200];
             sprintf(titre, "Gaussienne précision : %d", nbTranches);
             char titrex[200];
-            sprintf(titrex, "Nombre de lapins après %d ans (Max = %llu)", numberOfYears, maxValue);
+            sprintf(titrex, "Nombre de lapins après %d ans", numberOfYears);
 
             file->addFigure(x, resByTranche, nbTranches, maxValue / 10, (max + max * 0.1) / 10, 0, maxValue, 0, max + max * 0.1, titrex, "Nombre de simulations", titre);
         }

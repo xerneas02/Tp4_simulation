@@ -4,7 +4,7 @@
 
 #define MAJORITY 8
 #define MONTH_PER_YEAR 12
-#define MAX_LOOP 10000
+#define MAX_LOOP 1000
 
 #define ull unsigned long long
 
