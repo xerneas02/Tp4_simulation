@@ -57,7 +57,8 @@ void RabbitCategory::setRabbits(ull male, ull female)
  */
 void RabbitCategory::transferRabbit(RabbitCategory * category)
 {
-    ull maleTemp = 0; ull femaleTemp = 0;    
+    ull maleTemp = 0; ull femaleTemp = 0;   
+    double variances = (survivalRate - survivalRate*survivalRate); 
     
     if (male < MAX_LOOP) 
     {
@@ -68,7 +69,7 @@ void RabbitCategory::transferRabbit(RabbitCategory * category)
     }
     else
     {
-        maleTemp = genererGaussienne(male*survivalRate, 480);
+        maleTemp = genererGaussienne(male*survivalRate, sqrt(male*variances));
     }
     
 
@@ -81,7 +82,7 @@ void RabbitCategory::transferRabbit(RabbitCategory * category)
     }
     else
     {
-        femaleTemp = genererGaussienne(female*survivalRate, 480);
+        femaleTemp = genererGaussienne(female*survivalRate, sqrt(female*variances));
     }
 
     category->setRabbits(maleTemp, femaleTemp);

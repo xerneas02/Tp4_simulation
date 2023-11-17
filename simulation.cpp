@@ -165,7 +165,7 @@ void Simulation::howManyBabys()
     }
     else 
     {
-        litters = genererGaussienne(couples*6, 380);
+        litters = genererGaussienne(couples*6, sqrt((3/2)*couples));
     }    
 
     ull littersPerMonth[MONTH_PER_YEAR];
@@ -194,7 +194,7 @@ void Simulation::howManyBabys()
         }
         else
         {
-            babys = genererGaussienne(littersPerMonth[i]*4.5, 330);
+            babys = genererGaussienne(littersPerMonth[i]*4.5, sqrt((3/4)*couples));// la variance de genRandBabys est 3/4 donc on calcul l'ecart tyoe avec la formule sqrt(variance * number of iterations)
         }                
         maleNextYear  [i] += babys/2;
         femaleNextYear[i] += babys/2;
