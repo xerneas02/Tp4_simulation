@@ -9,7 +9,7 @@ CXXFLAGS = -std=c++11 -O3 -Wall -Wextra
 # Dossiers
 SRCDIR = .
 OBJDIR = obj
-BINDIR = bin
+BINDIR = bin2
 
 # Fichiers source
 SOURCES = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/latex/*.cpp)
@@ -21,7 +21,7 @@ OBJECTS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SOURCES))
 EXECUTABLE = $(BINDIR)/main
 
 # Règle de compilation
-all: $(EXECUTABLE)
+all: directories $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(OBJECTS) -o $@
@@ -29,10 +29,21 @@ $(EXECUTABLE): $(OBJECTS)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Commentez ou supprimez cette règle pour éviter de créer les dossiers
-#directories:
-# 	mkdir -p $(OBJDIR) $(BINDIR)
+# Règle pour créer les dossiers
+directories:
+ifeq ($(OS),Windows_NT)
+	if not exist $(OBJDIR) mkdir $(OBJDIR)
+	if not exist $(BINDIR) mkdir $(BINDIR)
+	if not exist $(OBJDIR)\latex mkdir $(OBJDIR)\latex
+else
+	mkdir -p $(OBJDIR) $(BINDIR) $(OBJDIR)/latex
+endif
 
 clean:
+ifeq ($(OS),Windows_NT)
 	del $(OBJDIR)\*.o
 	del $(OBJDIR)\latex\*.o
+else
+	rm -f $(OBJDIR)/*.o
+	rm -f $(OBJDIR)/latex/*.o
+endif
