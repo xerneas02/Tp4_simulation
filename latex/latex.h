@@ -22,7 +22,7 @@ private:
      * @param input La chaîne de caractères d'origine.
      * @return Une nouvelle chaîne de caractères avec les caractères spéciaux échappés.
      */
-    char* escapeCharacters(const char* input;
+    char* escapeCharacters(const char* input);
 
 public:
     /**
