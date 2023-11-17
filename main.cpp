@@ -26,7 +26,7 @@ int main()
 
     Simulation * sim = new Simulation(5, 5);
     long double total = 0;
-    int nbSimu = 100000;
+    int nbSimu = 280000;
     int numberOfYears = NUMBER_OF_YEAR;
 
     for (int i = 0; i < 4; i++)

@@ -1,3 +1,13 @@
+#ifndef RABBIT_CATEGORY_H
+
+#define RABBIT_CATEGORY_H
+
+#define MAJORITY 8
+#define MONTH_PER_YEAR 12
+#define MAX_LOOP 100000
+
+#define ull unsigned long long
+
 /**
  * @brief Classe représentant une catégorie de lapins (tous les lapins d'un même âge en mois).
  *
@@ -75,3 +85,8 @@ public:
      */
     void setRabbits(ull male, ull female);
 };
+
+
+#endif
+
+

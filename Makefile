@@ -9,7 +9,7 @@ CXXFLAGS = -std=c++11 -O3 -Wall -Wextra
 # Dossiers
 SRCDIR = .
 OBJDIR = obj
-BINDIR = bin2
+BINDIR = bin
 
 # Fichiers source
 SOURCES = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/latex/*.cpp)
