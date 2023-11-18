@@ -89,7 +89,7 @@ void LatexFile::addFigure(long double * dataX, long double * dataY , unsigned lo
     char * xLabelTmp = escapeCharacters(xLabel);
     char * yLabelTmp = escapeCharacters(yLabel);
     char * titleTmp  = escapeCharacters(title) ;
-    
+
     file << "\n\\begin{figure}[htbp]\n";
     file << "\\centering\n";
     file << "\\begin{tikzpicture}\n";
@@ -109,10 +109,12 @@ void LatexFile::addFigure(long double * dataX, long double * dataY , unsigned lo
 
     file << "yticks={";
     file << 0 ;
+
     for (unsigned long long i = 1; i < ymax/stepy; i++)
     {
         file << "," << i*stepy;
     }
+
     file << "},\n";
 
     file << "legend pos=north west,\nymajorgrids=true,\ngrid style=dashed,\n]\n\n";
@@ -120,6 +122,9 @@ void LatexFile::addFigure(long double * dataX, long double * dataY , unsigned lo
     file << "\\addplot[color=blue, line width=3pt,]\n";
 
     file << "coordinates {\n";
+
+    
+
     for (unsigned long long i = 0; i < size; i++)
     {
         file << "(" << dataX[i] << "," << dataY[i] << ")";

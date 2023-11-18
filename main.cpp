@@ -4,6 +4,7 @@
 #include <ctime>
 #include "math.h"
 #include "latex/latex.h"
+#include "rabbitCategory.hpp"
 
 /**
  * @brief Extrait les deux premiers chiffres d'un nombre entier.
@@ -25,6 +26,36 @@ int extraireDeuxPremiersChiffres(int nombre) {
     return deuxPremiersChiffres;
 }
 
+/**
+ * @brief Fonction qui génère la suite de Fibonacci
+ *
+ * @param tabX Tableau contenant les indices pour illustrer l'axe des abscisses
+ * @param tabY Tableau contenant chaque
+ * @param nbre Le nombre d'itération de la suite
+ * 
+ * @return La valeur du iéme terme de la suite de Fibonacci
+ */
+ull fibonacci(long double * tabX, long double * tabY, ull nbre)
+{
+    ull first = 1;
+    ull second = 1;
+
+    for (ull i = 0; i < nbre; i++)
+    {
+        if (i == 0 || i == 1)
+        {
+            tabX[i] = i;
+            tabY[i] = log(first);
+            continue;
+        }
+        second = first;
+        first += second;
+        tabX[i] = i;
+        tabY[i] = log(first);
+    }
+    return first;
+}
+
 
 int main() {
     /*----------Initialisation Mersenne Twister----------*/
@@ -32,6 +63,17 @@ int main() {
                    length = 4;
     init_by_array(init, length);
 
+    ull nbre = 62;
+    ull result;
+    long double tabX[nbre];
+    long double tabY[nbre];
+    char name[20] = "fibonnaci.tex";
+    result = fibonacci(tabX, tabY, nbre);
+    LatexFile * file = new LatexFile(name);
+    printf("test 1 %lld\n", result);
+    file->addFigure(tabX, tabY, nbre, 30, result/10, 0, nbre, 0, result, "Nombre d'itération de Fibonacci", "Nombre de lapins", "Illustration de l'évolution de lapins selon Fibonacci");
+    printf("test2\n");
+    file->closeLatex();
 
     // Initialisation de la simulation avec 5 lapins mâles et 5 lapins femelles.
     Simulation *sim = new Simulation(5, 5);
