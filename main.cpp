@@ -67,13 +67,15 @@ int main() {
     ull result;
     long double tabX[nbre];
     long double tabY[nbre];
+
     char name[20] = "fibonnaci.tex";
+
     result = fibonacci(tabX, tabY, nbre);
+
     LatexFile * file = new LatexFile(name);
-    printf("test 1 %lld\n", result);
     file->addFigure(tabX, tabY, nbre, 30, result/10, 0, nbre, 0, result, "Nombre d'itération de Fibonacci", "Nombre de lapins", "Illustration de l'évolution de lapins selon Fibonacci");
-    printf("test2\n");
     file->closeLatex();
+
 
     // Initialisation de la simulation avec 5 lapins mâles et 5 lapins femelles.
     Simulation *sim = new Simulation(5, 5);
@@ -88,7 +90,6 @@ int main() {
 
         // Allocation dynamique pour stocker les résultats des simulations.
         long double *resSimus = (long double *)malloc(sizeof(long double) * nbSimu);
-
         // Tableaux pour stocker les résultats par mois et par catégorie.
         long double totalPerMonth[numberOfYears * MONTH_PER_YEAR] = {0};
         long double totalPerCategory[MAX_CATEGORY] = {0};
@@ -100,8 +101,10 @@ int main() {
 
             // Simulation de l'évolution de la population sur plusieurs années.
             for (int k = 0; k < numberOfYears * MONTH_PER_YEAR; k++) {
+                
                 totalPerMonth[k] += (long double)sim->getNbRabbits() / nbSimu;
                 sim->nextMonth();
+                
             }
 
             // Collecte des résultats par catégorie.
@@ -121,9 +124,8 @@ int main() {
         printf("Nombre de lapin moyen après %d ans : %0.Lf (%0.LfM)\n", numberOfYears, total, total / 1000000000);
 
         // Création d'un fichier LaTeX pour générer des graphiques.
-        char name[20];
         sprintf(name, "Graph%d.tex", numberOfYears);
-        LatexFile *file = new LatexFile(name);
+        file = new LatexFile(name);
 
         int nbTranches = 4;
         int totalValid = 0;
@@ -182,7 +184,6 @@ int main() {
 
         printf("Nombre total de résultats valides : %d\n", totalValid);
         file->closeLatex();
-
         // Libération de la mémoire allouée dynamiquement.
         free(resSimus);
     }

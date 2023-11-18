@@ -25,7 +25,8 @@ Simulation::Simulation(ull nMales, ull nFemales)
     }
 
     maleStart = nMales;
-    femaleStart = nFemales;   
+    femaleStart = nFemales;
+    month = 0;   
 }
 
 /**
@@ -68,7 +69,7 @@ void Simulation::nextMonth()
     } 
 
     categories[0]->setRabbits(maleNextYear[month], femaleNextYear[month]);
-
+    
     month = (month + 1) % MONTH_PER_YEAR;
 }
 

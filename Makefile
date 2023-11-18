@@ -4,7 +4,7 @@
 CXX = g++
 
 # Options de compilation
-CXXFLAGS = -std=c++11 -O3 -Wall -Wextra
+CXXFLAGS = -std=c++11 -Og -Wall -Wextra
 
 # Dossiers
 SRCDIR = .

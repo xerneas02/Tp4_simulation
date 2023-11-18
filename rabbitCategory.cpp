@@ -3,7 +3,6 @@
 #include "mt.hpp"
 #include <math.h>
 
-
 /**
  * @brief Constructeur de la classe RabbitCategory.
  *
