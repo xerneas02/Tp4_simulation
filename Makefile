@@ -43,7 +43,9 @@ clean:
 ifeq ($(OS),Windows_NT)
 	del $(OBJDIR)\*.o
 	del $(OBJDIR)\latex\*.o
+	del $(BINDIR)\*
 else
 	rm -f $(OBJDIR)/*.o
 	rm -f $(OBJDIR)/latex/*.o
+	rm -f $(BINDIR)/*
 endif
