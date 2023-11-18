@@ -30,7 +30,7 @@ ull fibonacci(long double * tabX, long double * tabY, ull nbre);
  * @param nombre Le nombre entier dont on veut extraire les deux premiers chiffres.
  * @return Les deux premiers chiffres du nombre.
  */
-int extraireDeuxPremiersChiffres(int nombre)
+int extraireDeuxPremiersChiffres(int nombre);
 
 #endif
 
