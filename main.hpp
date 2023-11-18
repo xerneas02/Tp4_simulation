@@ -21,9 +21,20 @@
  */
 ull fibonacci(long double * tabX, long double * tabY, ull nbre);
 
+/**
+ * @brief Extrait les deux premiers chiffres d'un nombre entier.
+ *
+ * Cette fonction prend un nombre entier en paramètre, le convertit en chaîne de caractères,
+ * et extrait les deux premiers chiffres. Elle renvoie ces deux premiers chiffres sous forme d'entier.
+ *
+ * @param nombre Le nombre entier dont on veut extraire les deux premiers chiffres.
+ * @return Les deux premiers chiffres du nombre.
+ */
+int extraireDeuxPremiersChiffres(int nombre)
+
 #endif
 
-
+// Fais par Mathis Roubille et Thomas Dupois
 // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
