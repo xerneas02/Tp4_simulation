@@ -8,18 +8,7 @@
 #include "mt.hpp"
 #include "rabbitCategory.hpp"
 
-#define NUMBER_OF_YEAR 20
-
-typedef struct {
-    long double total;
-    int numberOfYears;
-    int nbSimu;
-    unsigned long mtState[624];  // État du Mersenne Twister
-    long double* totalPerMonth;
-    long double* totalPerCategory;
-    int i;
-    int j;
-} EtatSimulation;
+#define NUMBER_OF_YEAR 5
 
 /**
  * @brief Fonction qui génère la suite de Fibonacci
